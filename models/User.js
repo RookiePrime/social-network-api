@@ -11,9 +11,10 @@ const UserSchema = new Schema(
             type: String,
             required: 'A user must have a unique, valid email address!',
             unique: true,
-            validator: {
+            validate: {
                 validator: function(email) {
-                    return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email);
+                    const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+                    return reg.test(email);
                 },
                 message: email => `${email.value} is not a valid email address!`
             }
